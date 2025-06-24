@@ -12,7 +12,7 @@ const response = await fetch("http://localhost:4000/api/drinks")
 const json = await response.json()
 const drinks = json.data
 
-console.log(drinks)
+// console.log(drinks)
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
@@ -29,7 +29,41 @@ document.querySelector('#root').innerHTML = render(
 
 // Zprovoznění navigace
 
-const navButton = document.querySelector(".nav-btn")
-const navRollout = document.querySelector(".rollout-nav")
-navButton.addEventListener("click", () => navRollout.classList.toggle("nav-closed"))
-navRollout.addEventListener("click", () => navRollout.classList.toggle("nav-closed"))
+const navButtonElm = document.querySelector(".nav-btn")
+const navRolloutElm = document.querySelector(".rollout-nav")
+navButtonElm.addEventListener("click", () => navRolloutElm.classList.toggle("nav-closed"))
+navRolloutElm.addEventListener("click", () => navRolloutElm.classList.toggle("nav-closed"))
+
+// Objednání nápoje
+
+const orderFormsElms = document.querySelectorAll(".drink__controls")
+
+const handleOrder = async (event) => {
+  event.preventDefault()
+  const drinkId = event.target.dataset.id
+  // console.log(drinkId)
+
+  const response = await fetch(`http://localhost:4000/api/drinks/${drinkId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([{
+        op: "replace", 
+        path: "/ordered", 
+        value: true
+      }]),
+    }
+  );
+  
+  // console.log(response)
+
+  if(!response.ok) {
+    alert("Něco se pokazilo")
+  }
+
+  window.location.reload()
+}
+
+orderFormsElms.forEach(form => form.addEventListener(("submit"), handleOrder))
