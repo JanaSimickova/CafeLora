@@ -10,7 +10,12 @@ export const Drink = ({ id, name, ordered, image, layers }) => {
         </div>
         <div className="drink__info">
           <h3>{name}</h3>
-          <Layer color="#613916" label="espresso" />
+          {layers.map((layer) => (
+            <Layer 
+            color={layer.color}
+            label={layer.label}
+            />
+          ))}
         </div>
       </div>
       <form className="drink__controls">
