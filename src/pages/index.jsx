@@ -41,9 +41,12 @@ const orderFormsElms = document.querySelectorAll(".drink__controls")
 const handleOrder = async (event) => {
   event.preventDefault()
   const drinkId = event.target.dataset.id
+  const orderState = event.target.dataset.ordered
   // console.log(drinkId)
+  // console.log(orderState)
 
-  const response = await fetch(`http://localhost:4000/api/drinks/${drinkId}`,
+  const changeToTrue = async () => {
+    const response = await fetch(`http://localhost:4000/api/drinks/${drinkId}`,
     {
       method: "PATCH",
       headers: {
@@ -55,15 +58,46 @@ const handleOrder = async (event) => {
         value: true
       }]),
     }
-  );
+    );
   
-  // console.log(response)
-
-  if(!response.ok) {
-    alert("Něco se pokazilo")
+    if(!response.ok) {
+      alert("Něco se pokazilo")
+    }
   }
 
-  window.location.reload()
+    const changeToFalse = async () => {
+    const response = await fetch(`http://localhost:4000/api/drinks/${drinkId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([{
+        op: "replace", 
+        path: "/ordered", 
+        value: false
+      }]),
+    }
+    );
+  
+    if(!response.ok) {
+      alert("Něco se pokazilo")
+    }
+  }
+
+
+if(orderState === "false") {
+  changeToTrue()
+} else {
+  changeToFalse()
 }
+  
+window.location.reload()
+
+  // console.log(response)
+
+}
+
+
 
 orderFormsElms.forEach(form => form.addEventListener(("submit"), handleOrder))
