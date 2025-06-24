@@ -3,7 +3,7 @@ import "./index.css"
 export const Contact = () => {
   return (
     <section>
-      <div className="container">
+      <div className="container" id="contact">
         <h2>Kde nás najdete</h2>
         <div className="contact">
           <div className="contact__address">
