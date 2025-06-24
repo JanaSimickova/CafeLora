@@ -14,7 +14,7 @@ export const Menu = () => {
             id={0} 
             name="Espresso" 
             ordered={false} 
-            image="../pages/img/beans.jpg" 
+            image="../pages/img/beans.png" 
             layers={[ {
               color: '#613916',
               label: 'espresso',
