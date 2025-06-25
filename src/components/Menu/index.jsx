@@ -20,7 +20,6 @@ export const Menu = ({ drinks }) => {
             layers={drink.layers}
             />
           ))}
-          
         </div>
 
         <div className="order-detail">
