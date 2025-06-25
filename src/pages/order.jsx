@@ -14,9 +14,9 @@ const items = json.data
 document.querySelector('#root').innerHTML = render(
   <div className="page">
     <div className="page">
-    <Header showMenu={false} />
-    <Order items={items} />
-    <Footer />
+      <Header showMenu={false} />
+      <Order items={items} />
+      <Footer />
     </div>
   </div>
 );

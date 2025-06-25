@@ -27,12 +27,14 @@ document.querySelector('#root').innerHTML = render(
   </div>
 );
 
+
 // Zprovoznění navigace
 
 const navButtonElm = document.querySelector(".nav-btn")
 const navRolloutElm = document.querySelector(".rollout-nav")
 navButtonElm.addEventListener("click", () => navRolloutElm.classList.toggle("nav-closed"))
 navRolloutElm.addEventListener("click", () => navRolloutElm.classList.toggle("nav-closed"))
+
 
 // Objednání nápoje
 

@@ -12,8 +12,9 @@ export const Drink = ({ id, name, ordered, image, layers }) => {
           <h3>{name}</h3>
           {layers.map((layer) => (
             <Layer 
-            color={layer.color}
-            label={layer.label}
+              key={layer.label}
+              color={layer.color}
+              label={layer.label}
             />
           ))}
         </div>
